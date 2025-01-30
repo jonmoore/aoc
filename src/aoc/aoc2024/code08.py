@@ -1,5 +1,7 @@
 import itertools
 from collections import defaultdict
+from typing import Generator, Callable
+
 import aoc.helpers as helpers
 from aoc.helpers import RectGrid
 
@@ -20,7 +22,7 @@ def calculate_new_position(i1: int, j1: int, i2: int, j2: int, steps: int) -> tu
 
 def generate_fundamental_antinodes(
     grid: RectGrid, i1: int, j1: int, i2: int, j2: int
-) -> iter:
+) -> Generator[tuple, None, None]:
     """Yield antinodes that exist at fundamental steps relative to the two points."""
     assert (i1, j1) < (i2, j2)
     for steps in [-1, 2]:
@@ -31,7 +33,7 @@ def generate_fundamental_antinodes(
 
 def generate_resonant_antinodes(
     grid: RectGrid, i1: int, j1: int, i2: int, j2: int
-) -> iter:
+) -> Generator[tuple, None, None]:
     """Yield antinodes that exist at a range of resonant steps for the two points."""
     assert (i1, j1) < (i2, j2)
     for step_range in [itertools.count(), itertools.count(-1, -1)]:
@@ -44,7 +46,7 @@ def generate_resonant_antinodes(
 
 
 def generate_antinodes_for_pairs(
-    *, grid: RectGrid, antenna_dict: dict, antinode_gen: callable
+    *, grid: RectGrid, antenna_dict: dict, antinode_gen: Callable
 ) -> dict:
     """Generate antinodes for all pairs of antennas using a specified generator."""
     antinode_dict = defaultdict(list)
@@ -56,7 +58,7 @@ def generate_antinodes_for_pairs(
     return dict(antinode_dict)
 
 
-def calculate_antinodes_for_mode(*, grid: RectGrid, mode: str) -> None:
+def calculate_antinodes_for_mode(*, grid: RectGrid, mode: str) -> int:
     """Run the calculation of antinodes for the specified mode."""
     antinode_gen = {
         "fundamental": generate_fundamental_antinodes,

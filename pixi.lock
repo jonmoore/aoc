@@ -149,9 +149,9 @@ packages:
   name: aoc
   version: 0.1.0
   path: .
-  sha256: 8fb524ac2c9eecd5fb0b15f4b0c9e2e31c4778b63a97cd35e8500aef7f4d60c9
+  sha256: 41c98ba4ea1e0c861d2414c5d5ccd5ad7880dd0ea9d20f164dc1728c8a5260a7
   requires_dist:
-  - pytest-line-profiler>=0.2.1,<0.3 ; extra == 'test'
+  - pytest-line-profiler>=0.2.1 ; extra == 'test'
   requires_python: '>=3.12'
   editable: true
 - kind: conda
